@@ -1,0 +1,37 @@
+typedef struct
+{
+	Alfa		Name;
+	struct tMonsterType	*Next;
+	struct tUserType	*DefPlayer;
+	struct tObjectType	*ObjectTail;
+	uchar		DescRec, DescCode;
+	char		AtkSpeed;
+	char		AC;
+	short		Hits, MaxHits;
+	char		Lvl;
+	char		Num;
+	char		MReact, MParley;
+	uchar		WhichObj;
+	unsigned	Defend		: 1;
+	unsigned	Block		: 1;
+	unsigned	Follow		: 1;
+	unsigned	Guard		: 1;
+	unsigned	AtkLastAggr	: 1;
+	unsigned	SlowReact	: 1;
+	unsigned	FastReact	: 1;
+	unsigned	Invisible	: 1;
+	unsigned	Regenerate	: 1;
+	unsigned	Drain		: 1;
+	unsigned	Poison		: 1;
+	unsigned	AntiMagic	: 1;
+	unsigned	Undead		: 1;
+	unsigned	MoralReact	: 1;
+	unsigned	Flee		: 1;
+	unsigned	Assistance	: 1;
+	unsigned	MonSpells	: 1;
+	unsigned	Top			: 1;
+	unsigned	Permanent	: 1;
+	unsigned	Magic		: 1;
+	unsigned	SummonHelp	: 1;
+	unsigned	ImmoralReact	: 1;
+} OldMonsterType;
