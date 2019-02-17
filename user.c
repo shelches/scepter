@@ -4,26 +4,23 @@
 static FILE			*EPerson;
 static char			*EPERSON = WORKDIR "/ram/eperson.new";
 
-#ifdef	PROTO
 static void	OpenPer(void);
 static void	ClosePer(void);
 static int	SearchPlFile(char *Name);
-#endif
 
-static void	OpenPer()
+static void OpenPer(void)
 {
 	if (!(EPerson = fopen(EPERSON, FOPEN)))
 		Abort(" Sce203 - Error opening person file.");
 }
 
-static void	ClosePer()
+static void ClosePer(void)
 {
 	if (fclose(EPerson))
 		Abort(" Sce204 - Error closing person file.");
 }
 
-static int	SearchPlFile(Name)
-char	*Name;
+static int SearchPlFile(char *Name)
 {
 	Alfa	TempName;
 
@@ -37,8 +34,7 @@ char	*Name;
 	return FALSE;
 }
 
-int		PlayerOnFile(Name)
-char	*Name;
+int PlayerOnFile(char *Name)
 {
 	int		Found;
 
@@ -47,9 +43,7 @@ char	*Name;
 	return Found;
 }
 
-void	ReadPlayer(Player, Name)
-UserPoint	Player;
-char		*Name;
+void ReadPlayer(UserPoint Player, char *Name)
 {
 	if (SearchPlFile(Name))
 	{
@@ -126,8 +120,7 @@ char		*Name;
 	ClosePer();
 }
 
-void	FreePlayer(Player)
-UserPoint	Player;
+void FreePlayer(UserPoint Player)
 {
 	while (Player->ObjectTail)
 	{
@@ -140,8 +133,7 @@ UserPoint	Player;
 	free(Player);
 }
 
-void	WritePlayer(Player)
-UserPoint	Player;
+void WritePlayer(UserPoint Player)
 {
 	ObjectPoint			Pt;
 	struct tUserFRec	EBuffer;
@@ -190,8 +182,7 @@ UserPoint	Player;
 	ClosePer();
 }
 
-void	DeleteUsr(Nm)
-char	*Nm;
+void DeleteUsr(char *Nm)
 {
 	if (SearchPlFile(Nm))
 	{
@@ -205,8 +196,7 @@ char	*Nm;
 	ClosePer();
 }
 
-void	ChangeUsrName(OldNm, NewNm)
-char	*OldNm, *NewNm;
+void ChangeUsrName(char *OldNm, char *NewNm)
 {
 	if (SearchPlFile(OldNm))
 	{
@@ -221,8 +211,7 @@ char	*OldNm, *NewNm;
 	ClosePer();
 }
 
-void	Users(Word)
-char	*Word;
+void Users(char *Word)
 {
 	UNUSED(Word);
 	
@@ -244,9 +233,7 @@ char	*Word;
 	ClosePer();
 }
 
-UserPoint	FindPlayer(Word, PlayerTail)
-char		*Word;
-UserPoint	PlayerTail;
+UserPoint FindPlayer(char *Word, UserPoint PlayerTail)
 {
 	UserPoint	Usr;
 	NameTList	UserNameList;
@@ -271,8 +258,7 @@ UserPoint	PlayerTail;
 	return Usr;
 }
 
-UserPoint	FindUser(Word)
-char		*Word;
+UserPoint FindUser(char *Word)
 {
 	UserPoint	Usr;
 	NameTList	UserNameList;
@@ -297,8 +283,7 @@ char		*Word;
 	return Usr;
 }
 
-UserPoint	FindPid(FPid)
-int			FPid;
+UserPoint FindPid(int FPid)
 {
 	UserPoint	Usr;
 
@@ -308,8 +293,7 @@ int			FPid;
 	return NULL;
 }
 
-int		Hash(Word)
-char	*Word;
+int Hash(char *Word)
 {
 	int		Total, ILoop;
 
@@ -319,8 +303,7 @@ char	*Word;
 	return Total;
 }
 
-long	Expr(Lvl)
-int		Lvl;
+long Expr(int Lvl)
 {
 	if (Lvl <= 1)
 		return 0L;
@@ -329,8 +312,7 @@ int		Lvl;
 	return 64L << Lvl;
 }
 
-void	PrintExp(Plyr)
-UserPoint	Plyr;
+void PrintExp(UserPoint Plyr)
 {
 	long	Exp;
 
@@ -342,7 +324,7 @@ UserPoint	Plyr;
 	QOut(Term, B1);
 }
 
-void	Inventory()
+void Inventory(void)
 {
 	if (!User->ObjectTail)
 		QOut(Term, "0You are carrying nothing at all.");
@@ -373,11 +355,7 @@ void	Inventory()
 	}
 }
 
-void	PrintDmg(Player, Damage, Brf, Str)
-UserPoint	Player;
-int			Damage;
-int			Brf;
-char		*Str;
+void PrintDmg(UserPoint Player, int Damage, int Brf, char *Str)
 {
 	if (Brf)
 	{
@@ -403,12 +381,11 @@ char		*Str;
 	}
 }
 
-int		ReadyCheck(LastAtk)
-long	LastAtk;
+int ReadyCheck(long LastAtk)
 {
 	if (RealTime + 1 < LastAtk)
 	{
-		sprintf(B1, "0Not ready!  Wait %d more seconds.", LastAtk - RealTime);
+		sprintf(B1, "0Not ready!  Wait %ld more seconds.", LastAtk - RealTime);
 		QOut(Term, B1);
 	}
 	else
@@ -420,7 +397,7 @@ long	LastAtk;
 	return FALSE;
 }
 
-void	PromptUser()
+void PromptUser(void)
 {
 	char	*p = NULL;
 
@@ -461,7 +438,7 @@ void	PromptUser()
 	}
 }
 
-void	Init()
+void Init(void)
 {
 	int		ILoop;
 

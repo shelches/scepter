@@ -1,14 +1,10 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	ModObject(ObjectPoint Object);
 static void	SetClass(ObjectPoint Obj, ObClassType Class);
 static void	BadClass(int WhichParm);
 static ObjectPoint	InsertObject(ObjectPoint *Tail);
 static void	ShowETList(int type, int Index);
-#else
-static ObjectPoint	InsertObject();
-#endif
 
 static PLType	ObjParms[] =
 {
@@ -25,8 +21,7 @@ static PLType	ObjParms[] =
 /* 37 */	"CU", DFlag,	"TL", DFlag
 };
 
-static void	ModObject(Object)
-ObjectPoint	Object;
+static void ModObject(ObjectPoint Object)
 {
 	int		NP, WhichParm, Number, Flag;
 	Alfa	Word;
@@ -377,8 +372,7 @@ ObjectPoint	Object;
 		QOut(Term, "0Object modified.");
 }
 
-void	ModName(Str)
-char	*Str;
+void ModName(char *Str)
 {
 	while (Buf[Loc] != '"' && Loc < LenBuf)
 		Loc++;
@@ -408,9 +402,7 @@ char	*Str;
 	}
 }
 
-static void	SetClass(Obj, Class)
-ObjectPoint	Obj;
-ObClassType	Class;
+static void SetClass(ObjectPoint Obj, ObClassType Class)
 {
 	Obj->ObClass = Class;
 	switch ((int) Class)
@@ -486,16 +478,14 @@ ObClassType	Class;
 	}
 }
 
-static void	BadClass(WhichParm)
-int		WhichParm;
+static void BadClass(int WhichParm)
 {
 	sprintf(B1, "0%s - bad parameter for this obtype.  Mod not made.",
 			Parms[WhichParm].PName);
 	QOut(Term, B1);
 }
 
-static ObjectPoint	InsertObject(Tail)
-ObjectPoint	*Tail;
+static ObjectPoint InsertObject(ObjectPoint *Tail)
 {
 	ObjectPoint	Obj;
 
@@ -507,10 +497,7 @@ ObjectPoint	*Tail;
 	return Obj;
 }
 
-void	EditObject(EditCmd, Which, ONum)
-EdFunc	EditCmd;
-char	*Which;
-int		ONum;
+void EditObject(EdFunc EditCmd, char *Which, int ONum)
 {
 	ObjectPoint		Object, Container, PTemp;
 	UserPoint		Player;
@@ -692,9 +679,7 @@ int		ONum;
 	}
 }
 
-void	EditOList(EditCmd, OIndex)
-EdFunc	EditCmd;
-int		OIndex;
+void EditOList(EdFunc EditCmd, int OIndex)
 {
 	if (EditCmd == E_DELETE)
 		QOut(Term, "0OList cannot be disposed of.");
@@ -741,9 +726,7 @@ int		OIndex;
 	}
 }
 
-void	EditDscrpt(EditCmd, Rec)
-EdFunc	EditCmd;
-int		Rec;
+void EditDscrpt(EdFunc EditCmd, int Rec)
 {
 	int		Line, Found, ILoop;
 	Alfa	Dummy;
@@ -852,7 +835,7 @@ int		Rec;
 	}
 }
 
-void	EnterDesc()
+void EnterDesc(void)
 {
 	int		Count, Slash, ILoop;
 
@@ -904,9 +887,7 @@ void	EnterDesc()
 	Loc = LenBuf + 1;
 }
 
-void	EditETList(EditCmd, WhatCode, Index)
-EdFunc	EditCmd;
-int		WhatCode, Index;
+void EditETList(EdFunc EditCmd, int WhatCode, int Index)
 {
 	int		ILoop;
 
@@ -971,8 +952,7 @@ int		WhatCode, Index;
 	}
 }
 
-static void	ShowETList(type, Index)
-int		type, Index;
+static void ShowETList(int type, int Index)
 {
 	int		ILoop, Entry[8];
 

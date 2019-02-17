@@ -1,16 +1,11 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static int	ReadObj(ObjRec *Rec, int Room, int Type);
 static void	WriteObj(ObjRec *Rec, int Room, int Type);
 static int	HashObj(int Room, int Type);
 static int	ReadMon(MonRec *Rec, int Room, int Type);
-#endif
 
-void	ReadUObj(Rm, Object, Type)
-RmCodeType	Rm;
-ObjectPoint	*Object;
-int			Type;
+void ReadUObj(RmCodeType Rm, ObjectPoint *Object, int Type)
 {
 	ObjRec		Rec;
 
@@ -64,10 +59,7 @@ int			Type;
 		*Object = NULL;
 }
 
-void	WriteUObj(Rm, Object, Type)
-RmCodeType	Rm;
-ObjectPoint	Object;
-int			Type;
+void WriteUObj(RmCodeType Rm, ObjectPoint Object, int Type)
 {
 	ObjectPoint	Pt;
 	ObjRec		Rec;
@@ -91,8 +83,7 @@ int			Type;
 	WriteObj(&Rec, Rm, Type);
 }
 
-void	DeleteUObj(Rm)
-RmCodeType	Rm;
+void DeleteUObj(RmCodeType Rm)
 {
 	int		Type;
 
@@ -129,8 +120,7 @@ RmCodeType	Rm;
 	}
 }
 
-static int	ReadObj(Rec, Room, Type)
-ObjRec	*Rec;
+static int ReadObj(ObjRec *Rec, int Room, int Type)
 {
 	int		RecNum, First;
 
@@ -156,8 +146,7 @@ ObjRec	*Rec;
 	return 0;
 }
 
-static void	WriteObj(Rec, Room, Type)
-ObjRec	*Rec;
+static void WriteObj(ObjRec *Rec, int Room, int Type)
 {
 	ObjRec	Tmp;
 	int		RecNum, First;
@@ -185,15 +174,12 @@ ObjRec	*Rec;
 	}
 }
 
-static int	HashObj(Room, Type)
-int		Room, Type;
+static int HashObj(int Room, int Type)
 {
 	return (int)(((long)Room * 73 + Type) % 1009);
 }
 
-void	ReadUMon(Rm, Monster)
-RmCodeType		Rm;
-MonsterPoint	*Monster;
+void ReadUMon(RmCodeType Rm, MonsterPoint *Monster)
 {
 	MonRec	MRec;
 
@@ -230,8 +216,7 @@ MonsterPoint	*Monster;
 		*Monster = NULL;
 }
 
-static int	ReadMon(Rec, Room, Type)
-MonRec	*Rec;
+static int ReadMon(MonRec *Rec, int Room, int Type)
 {
 	int		RecNum, First;
 
@@ -257,9 +242,7 @@ MonRec	*Rec;
 	return 0;
 }
 
-void	WriteUMon(Rm, Monster)
-RmCodeType		Rm;
-MonsterPoint	Monster;
+void WriteUMon(RmCodeType Rm, MonsterPoint Monster)
 {
 	MonsterPoint	Pt;
 	MonRec			MRec, Tmp;
@@ -295,8 +278,7 @@ MonsterPoint	Monster;
 	}
 }
 
-void	DeleteMon(Rm)
-RmCodeType	Rm;
+void DeleteMon(RmCodeType Rm)
 {
 	MonRec	MRec;
 	int		RecNum, First;

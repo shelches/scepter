@@ -8,8 +8,7 @@
 #include "common.h"
 #include "scepter.h"
 
-/*static unsigned	QSegment, EncSegment, ObjSegment;*/
-static char *QSegment/*, *EncSegment, *ObjSegment*/;
+static char *QSegment;
 static short *EncSegment;
 static short *ObjSegment;
 
@@ -50,15 +49,13 @@ char QSegUpdate(char c)
 	return c;
 }
 
-void	QAss(Mbx, Chn)
-char	*Mbx;
-int		*Chn;
+void QAss(char *Mbx, int *Chn)
 {
 	UNUSED(Mbx);
 	UNUSED(Chn);
 }
 
-void	QCre()
+void QCre(void)
 {
 	/* SPS
 	if (!(Cmd_flags & RUN_BACKGROUND))
@@ -84,8 +81,7 @@ void	QCre()
 	ObjSegment = (short *)malloc((ObjListLen + 1) * 8 * sizeof(short));
 }
 
-int GetETIndex(table, row, col)
-int		table, row, col;
+int GetETIndex(int table, int row, int col)
 {
 	int	val;
 	short	*Index;
@@ -115,13 +111,12 @@ void PutETIndex(int table, int row, int col, int val)
 	/*set_extra_segment(QSegment);*/
 }
 
-void	QDea(Chn)
-int		Chn;
+void QDea(int Chn)
 {
 	UNUSED(Chn);
 }
 
-static void	QHang(int Chn)
+static void QHang(int Chn)
 {
 	int i;
 
@@ -130,9 +125,7 @@ static void	QHang(int Chn)
 			QUsers[i].Pid = 0;
 }
 
-void	QRea(Str, Chn)
-char	*Str;
-int		*Chn;
+void QRea(char *Str, int *Chn)
 {
 	do
 	{
@@ -174,9 +167,7 @@ int		*Chn;
 	} while (QUser == MaxUsers);
 }
 
-void	QOut(Chn, Str)
-int		Chn;
-char	*Str;
+void QOut(int Chn, char *Str)
 {
 	if (*Str < '0' || *Str > '4')
 		printf("Error in QOut(): %s\n", Str);
@@ -189,7 +180,7 @@ char	*Str;
 	}
 }
 
-void	GetNextMsg()
+void GetNextMsg(void)
 {
 	char	NextMsg[256];
 	int		j;
@@ -208,9 +199,7 @@ void	GetNextMsg()
 		QUsers[QUser].Pid = 0;
 }
 
-/*#define	MAXTTY	16*/
-
-void	Who()
+void Who(void)
 {
 	char *task;
 	int i, j;
@@ -311,7 +300,7 @@ void	Who()
 	*/
 }
 
-void	CheckHup()
+void CheckHup(void)
 {
 	int Count;
 	int ILoop;

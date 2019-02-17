@@ -1,11 +1,9 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	AnnounceLogin(void);
 static void	SetStats(ChType Cl, int Vit, int Fat, int Mag, int Mony);
-#endif
 
-static void	AnnounceLogin()
+static void AnnounceLogin(void)
 {
 	User->Status = SNormal;
 	*User->LastCmd = '\0';
@@ -47,7 +45,7 @@ static void	AnnounceLogin()
 	RoomDisplay(User->RmCode, User->Brief);
 }
 
-UserPoint	Login()
+UserPoint Login(void)
 {
 	UserPoint	NewUser;
 
@@ -75,7 +73,7 @@ UserPoint	Login()
 	return NewUser;
 }
 
-void	EnterSex()
+void EnterSex(void)
 {
 	char	Ch;
 	int		Num;
@@ -102,7 +100,7 @@ void	EnterSex()
 	AnnounceLogin();
 }
 
-void	NewPW()
+void NewPW(void)
 {
 	int		Dummy;
 	Alfa	PassWord;
@@ -116,7 +114,7 @@ void	NewPW()
 	}
 }
 
-void	EnterStats()
+void EnterStats(void)
 {
 	int		ILoop, Sum;
 	int		Stat[5];
@@ -156,7 +154,7 @@ void	EnterStats()
 	}
 }
 
-void	EnterSkill()
+void EnterSkill(void)
 {
 	int		Ch, Num;
 	Alfa	Word;
@@ -178,9 +176,7 @@ void	EnterSkill()
 	}
 }
 
-static void	SetStats(Cl, Vit, Fat, Mag, Mony)
-ChType	Cl;
-int		Vit, Fat, Mag, Mony;
+static void SetStats(ChType Cl, int Vit, int Fat, int Mag, int Mony)
 {
 	User->Class = Cl;
 	User->Hits = User->MaxHits = Vit;
@@ -189,7 +185,7 @@ int		Vit, Fat, Mag, Mony;
 	User->Money = Mony;
 }
 
-void	ChooseClass()
+void ChooseClass(void)
 {
 	int		Num;
 	Alfa	Word;
@@ -231,7 +227,7 @@ void	ChooseClass()
 	}
 }
 
-void	MatchPW()
+void MatchPW(void)
 {
 	int		Dummy;
 	Alfa	PassWord;
@@ -254,7 +250,7 @@ void	MatchPW()
 	}
 }
 
-void	GetName()
+void GetName(void)
 {
 	UserPoint	TempNext, Other;
 	UserType	DumUser;

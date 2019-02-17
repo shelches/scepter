@@ -1,13 +1,11 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	ModPlayer(UserPoint Player, int OnLine);
 static void	EditPlayer(EdFunc EditCmd, char *Which);
 static void	EditFile(EdFunc EditCmd, char *Which);
 static void	EditRoom(EdFunc EditCmd, int Rm);
 static void	EditMonster(EdFunc EditCmd, char *Which, int MNum, int WhatCode);
 static void	AssocErr(void);
-#endif
 
 static PLType	UsrParms[] =
 {
@@ -48,7 +46,7 @@ static PLType	MonParms[] =
 /* 33 */	"NI", DFlag,	"WA", DFlag,	"UQ", DFlag
 };
 
-void	Edit()
+void Edit(void)
 {
 	NameTList	EditList;
 	Alfa		EditCmd, What, Which;
@@ -194,9 +192,7 @@ void	Edit()
 	}
 }
 
-static void	ModPlayer(Player, OnLine)
-UserPoint	Player;
-int			OnLine;
+static void ModPlayer(UserPoint Player, int OnLine)
 {
 	int		NP, WhichParm, Number, Flag;
 	Alfa	Word, OldName;
@@ -480,9 +476,7 @@ int			OnLine;
 	}
 }
 
-static void	EditPlayer(EditCmd, Which)
-EdFunc	EditCmd;
-char	*Which;
+static void EditPlayer(EdFunc EditCmd, char *Which)
 {
 	UserPoint	Player;
 
@@ -522,9 +516,7 @@ char	*Which;
 		QOut(Term, "0Player not found.");
 }
 
-static void	EditFile(EditCmd, Which)
-EdFunc	EditCmd;
-char	*Which;
+static void EditFile(EdFunc EditCmd, char *Which)
 {
 	UserType	Player;
 	int			Exists;
@@ -573,9 +565,7 @@ char	*Which;
 	}
 }
 
-static void	EditRoom(EditCmd, Rm)
-EdFunc	EditCmd;
-int		Rm;
+static void EditRoom(EdFunc EditCmd, int Rm)
 {
 	if (Rm < 1 || Rm > NumRooms)
 	{
@@ -731,10 +721,7 @@ int		Rm;
 	}
 }
 
-static void	EditMonster(EditCmd, Which, MNum, WhatCode)
-EdFunc	EditCmd;
-char	*Which;
-int		MNum, WhatCode;
+static void EditMonster(EdFunc EditCmd, char *Which, int MNum, int WhatCode)
 {
 	MonsterPoint	Monster;
 	int				Rm;
@@ -999,10 +986,7 @@ int		MNum, WhatCode;
 	}
 }
 
-int		GetEditParm(LPList, Word, Num, Flag)
-int		LPList;
-char	*Word;
-int		*Num, *Flag;
+int GetEditParm(int LPList, char *Word, int *Num, int *Flag)
 {
 	char	Parm[3];
 	int		WhichParm;
@@ -1095,7 +1079,7 @@ int		*Num, *Flag;
 	return WhichParm;
 }
 
-static void	AssocErr()
+static void AssocErr(void)
 {
 	QOut(Term, "0Sorry, associate DMs can't do that.");
 }

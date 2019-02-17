@@ -1,12 +1,11 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	WhyDie(void);
 static void	EnterWhyDie(void);
 static void	DispStatus(UserPoint Plr);
-#endif
+static void SendMsg(int Tm, char *Verb, int MStart, int MEnd, int NoID, int NoQuote);
 
-void	Appeal()
+void Appeal(void)
 {
 	UserPoint	Dm;
 
@@ -79,7 +78,7 @@ void	Appeal()
 		}
 }
 
-void	Run()
+void Run(void)
 {
 	int		ILoop, Dir, GoodDir = FALSE;
 
@@ -143,9 +142,7 @@ void	Run()
 	}
 }
 
-void	Pawn(Word, Num)
-char	*Word;
-int		Num;
+void Pawn(char *Word, int Num)
 {
 	ObjectPoint	Object;
 
@@ -196,8 +193,7 @@ int		Num;
 		QOut(Term, "0You don't own that item.");
 }
 
-void	Buy(Num, Rm)
-int		Num, Rm;
+void Buy(int Num, int Rm)
 {
 	switch (W(Rm))
 	{
@@ -321,7 +317,7 @@ int		Num, Rm;
 	}
 }
 
-void	Catalog()
+void Catalog(void)
 {
 	int			ILoop;
 
@@ -363,8 +359,7 @@ void	Catalog()
 	}
 }
 
-void	TagPlayer(Word)
-char	*Word;
+void TagPlayer(char *Word)
 {
 	UserPoint	Plyr;
 
@@ -393,8 +388,7 @@ char	*Word;
 	}
 }
 
-void	FollowPlayer(Word)
-char	*Word;
+void FollowPlayer(char *Word)
 {
 	UserPoint	Leader;
 
@@ -416,8 +410,7 @@ char	*Word;
 	}
 }
 
-void	Lose(Word)
-char	*Word;
+void Lose(char *Word)
 {
 	UserPoint	FollowPlyr;
 
@@ -443,7 +436,7 @@ char	*Word;
 	}
 }
 
-static void	WhyDie()
+static void WhyDie(void)
 {
 	User->Status = SLogin;
 	StopFollow(User);
@@ -465,7 +458,7 @@ static void	WhyDie()
 		Dead();
 }
 
-static void	EnterWhyDie()
+static void EnterWhyDie(void)
 {
 	int		ILoop, Found;
 
@@ -490,8 +483,7 @@ static void	EnterWhyDie()
 	Dead();
 }
 
-void	Quit(QuitHow)
-int		QuitHow;
+void Quit(int QuitHow)
 {
 	int			Num;
 	TimeType	Delay;
@@ -509,7 +501,7 @@ int		QuitHow;
 	if (Delay < QuitWait)
 	{
 		sprintf(B1,
-			"0Sorry, you must wait at least %d more seconds before quitting.",
+			"0Sorry, you must wait at least %ld more seconds before quitting.",
 			QuitWait - Delay);
 		QOut(Term, B1);
 	}
@@ -538,8 +530,7 @@ int		QuitHow;
 	}
 }
 
-static void	DispStatus(Plr)
-UserPoint	Plr;
+static void DispStatus(UserPoint Plr)
 {
 	char	*Cp;
 
@@ -588,8 +579,7 @@ UserPoint	Plr;
 	QOut(Term, B1);
 }
 
-void	GetStatus(Word)
-char		*Word;
+void GetStatus(char *Word)
 {
 	UserPoint	Player;
 
@@ -612,8 +602,7 @@ char		*Word;
 				DispStatus(Player);
 }
 
-void	TextLimits(MesStart, MesEnd)
-int		*MesStart, *MesEnd;
+void TextLimits(int *MesStart, int *MesEnd)
 {
 	int		KLoop;
 
@@ -631,10 +620,7 @@ int		*MesStart, *MesEnd;
 	}
 }
 
-static void	SendMsg(Tm, Verb, MStart, MEnd, NoID, NoQuote)
-int		Tm;
-char	*Verb;
-int		MStart, MEnd, NoID, NoQuote;
+static void SendMsg(int Tm, char *Verb, int MStart, int MEnd, int NoID, int NoQuote)
 {
 	int		LineLen, JLoop, Length;
 
@@ -680,8 +666,7 @@ int		MStart, MEnd, NoID, NoQuote;
 	QOut(Tm, B1);
 }
 
-void	Talk(Word)
-char	*Word;
+void Talk(char *Word)
 {
 	int		NoID;
 
@@ -827,7 +812,7 @@ char	*Word;
 	Loc = LenBuf + 1;
 }
 
-void	DoCmd()
+void DoCmd(void)
 {
 	if (User->Entry == XDead)
 	{

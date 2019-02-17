@@ -2,7 +2,7 @@
 
 ObjRec	rec;
 
-main()
+void main(void)
 {
 	FILE	*fp;
 	int		i, j;

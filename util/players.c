@@ -2,7 +2,7 @@
 
 struct tUserFRec	rec;
 
-main()
+void main(void)
 {
 	FILE	*fp;
 	int		i, j;

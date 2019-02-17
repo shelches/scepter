@@ -1,22 +1,16 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static UserPoint	XXPFollow(UserPoint Usr);
 static void	ShareExperience(MonsterPoint Mon, RmCodeType Rm);
 static void	SharePlayerExp(UserPoint Plyr, RmCodeType Rm);
 static void	MakeTreasure(MonsterPoint Monster, int Rm);
-#else
-static UserPoint	XXPFollow();
-#endif
 
 /*	GoDirection lets players move from room to room.  It moves players N, S, E,
 	W, U, D and through portals and doors.  Movement is prohibited if a monster
 	blocks the exit.  If the player is not blocked, following monsters have a
 	66% chance of following the player into the next room. */
 
-void	GoDirection(Word, Num)
-char	*Word;
-int		Num;
+void GoDirection(char *Word, int Num)
 {
 	int				Leave, Blocked, Followed, Following;
 	RmCodeType		Rm, NewRm;
@@ -280,8 +274,7 @@ int		Num;
 	}
 }
 
-static UserPoint	XXPFollow(Usr)
-UserPoint	Usr;
+static UserPoint XXPFollow(UserPoint Usr)
 {
 	for (; Usr; Usr = Usr->Next)
 		if (Usr->Follow == User)
@@ -289,9 +282,7 @@ UserPoint	Usr;
 	return NULL;
 }
 
-void	ReturnObj(Word, Num)
-char	*Word;
-int		Num;
+void ReturnObj(char *Word, int Num)
 {
 	ObjectPoint	Object;
 
@@ -304,7 +295,7 @@ int		Num;
 		QOut(Term, "0Object not found.");
 }
 
-void	Track()
+void Track(void)
 {
 	int		Dir;
 
@@ -366,9 +357,7 @@ void	Track()
 }
 
 /*	use a weapon, shield, or other item  */
-int		UseObject(Word, Num)
-char	*Word;
-int		Num;
+int UseObject(char *Word, int Num)
 {
 	ObjectPoint	Object;
 	int			RetVal, OnGround;
@@ -585,8 +574,7 @@ int		Num;
 	return RetVal;
 }
 
-void	Logoff(Usr)
-UserPoint	Usr;
+void Logoff(UserPoint Usr)
 {
 	if (Usr->Status == SLogin || Usr->Status == SInit || Usr->Entry == XDead)
 	{
@@ -606,7 +594,7 @@ UserPoint	Usr;
 	--NUsers;
 }
 
-void	KillPlayer()
+void KillPlayer(void)
 {
 	DeleteUser(User);
 	if (PlayerOnFile(User->Name))
@@ -618,7 +606,7 @@ void	KillPlayer()
 	--NUsers;
 }
 
-void	SaveChar()
+void SaveChar(void)
 {
 	if (User->Lvl < 2)
 		QOut(Term,
@@ -641,7 +629,7 @@ void	SaveChar()
 	}
 }
 
-void	Off()
+void Off(void)
 {
 	while (User = UserTail)
 	{
@@ -651,7 +639,7 @@ void	Off()
 	}
 }
 
-void	Dead()
+void Dead(void)
 {
 	ObjectPoint	Obj, Body, Money;
 	RmCodeType	Rm;
@@ -771,8 +759,7 @@ void	Dead()
 	}
 }
 
-int		MonExperience(Mon)
-MonsterPoint	Mon;
+int MonExperience(MonsterPoint Mon)
 {
 	int		Exp;
 
@@ -787,9 +774,7 @@ MonsterPoint	Mon;
 	return 5 * Max(1, Exp);
 }
 
-static void	ShareExperience(Mon, Rm)
-MonsterPoint	Mon;
-RmCodeType		Rm;
+static void ShareExperience(MonsterPoint Mon, RmCodeType Rm)
 {
 	int			NewExp, NumInvolved;
 	UserPoint	Plyr;
@@ -811,9 +796,7 @@ RmCodeType		Rm;
 		}
 }
 
-static void	SharePlayerExp(Plyr, Rm)
-UserPoint	Plyr;
-RmCodeType	Rm;
+static void SharePlayerExp(UserPoint Plyr, RmCodeType Rm)
 {
 	int			NewExp, NumInvolved;
 	UserPoint	Player;
@@ -836,9 +819,7 @@ RmCodeType	Rm;
 		}
 }
 
-void	ProtectNPC(Player, Monster)
-UserPoint		Player;
-MonsterPoint	Monster;
+void ProtectNPC(UserPoint Player, MonsterPoint Monster)
 {
 #ifdef USEJAIL
 	PrintMon(Monster, TRUE, FALSE, B2);
@@ -886,9 +867,7 @@ MonsterPoint	Monster;
 #endif
 }
 
-static void	MakeTreasure(Monster, Rm)
-MonsterPoint	Monster;
-int				Rm;
+static void MakeTreasure(MonsterPoint Monster, int Rm)
 {
 	ObjectPoint	Obj, LastObj;
 	int			Nothing;
@@ -954,9 +933,7 @@ int				Rm;
 	}
 }
 
-void	Turn(Word, Num)
-char	*Word;
-int		Num;
+void Turn(char *Word, int Num)
 {
 	MonsterPoint	Mon;
 
@@ -1023,8 +1000,7 @@ int		Num;
 	}
 }
 
-void	HitPlayer(Damage)
-int		Damage;
+void HitPlayer(int Damage)
 {
 	UserPoint	Player;
 
@@ -1113,8 +1089,7 @@ int		Damage;
 	Messages are sent to all involved in the kill, and treasure and experience
 	are distributed. */
 
-void	HitMonster(Damage)
-int		Damage;
+void HitMonster(int Damage)
 {
 	MonsterPoint	Monster;
 	RmCodeType		Rm;

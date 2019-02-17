@@ -1,11 +1,8 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void TrapCheck(int Trap);
-#endif
 
-static void	TrapCheck(Trap)
-int		Trap;
+static void TrapCheck(int Trap)
 {
 	int		Dmg;
 
@@ -79,9 +76,7 @@ int		Trap;
 	}
 }
 
-void	StopUsing(Usr, Object)
-UserPoint	Usr;
-ObjectPoint	Object;
+void StopUsing(UserPoint Usr, ObjectPoint Object)
 {
 	if (!Object)
 		return;
@@ -108,10 +103,7 @@ ObjectPoint	Object;
 		Usr->USRingR = NULL;
 }
 
-void	GetObject(Word, Num, Rm)
-char		*Word;
-int			Num;
-RmCodeType	Rm;
+void GetObject(char *Word, int Num, RmCodeType Rm)
 {
 	ObjectPoint Object, ObTail;
 	ObjectPoint Box = NULL;
@@ -256,10 +248,7 @@ RmCodeType	Rm;
 	}
 }
 
-void	DropObject(Word, Num, Rm)
-char		*Word;
-int			Num;
-RmCodeType	Rm;
+void DropObject(char *Word, int Num, RmCodeType Rm)
 {
 	ObjectPoint	Object, ObTail, Box;
 	int			Num2, Held;
@@ -347,8 +336,7 @@ RmCodeType	Rm;
 	LocalMsg(B1);
 }
 
-int		SpellCost(Cost, MinLvl, MinInt)
-int		Cost, MinLvl, MinInt;
+int SpellCost(int Cost, int MinLvl, int MinInt)
 {
 	if (User->Int < MinInt)
 		QOut(Term, "0You don't have the intelligence to cast the spell.");
@@ -379,9 +367,7 @@ int		Cost, MinLvl, MinInt;
 	return FALSE;
 }
 
-int		Look(Word, Num)
-char	*Word;
-int		Num;
+int Look(char *Word, int Num)
 {
 	UserPoint	Player;
 	int			RetVal;
@@ -600,7 +586,7 @@ int		Num;
 	return RetVal;
 }
 
-void	Train()
+void Train(void)
 {
 	int		TRoom;
 	long	ReqExp;
@@ -666,9 +652,7 @@ void	Train()
 	SaveChar();
 }
 
-void	OpenClose(Word, Num)
-char	*Word;
-int		Num;
+void OpenClose(char *Word, int Num)
 {
 	ObjectPoint	Obj;
 	int			ObTrap, ObLocked, ObClosed;
@@ -890,9 +874,7 @@ int		Num;
 	}
 }
 
-void	HitShArmor(Plyr, Damage)
-UserPoint	Plyr;
-int			*Damage;
+void HitShArmor(UserPoint Plyr, int *Damage)
 {
 	ObjectPoint	Temp;
 
@@ -926,9 +908,7 @@ int			*Damage;
 	}
 }
 
-void	Hide(Word, Num)
-char	*Word;
-int		Num;
+void Hide(char *Word, int Num)
 {
 	ObjectPoint	Obj;
 
@@ -969,7 +949,7 @@ int		Num;
 		QOut(Term, "0You aren't holding that.");
 }
 
-void	Search()
+void Search(void)
 {
 	UserPoint	HidPlyr;
 	ObjectPoint	HidObj;
@@ -1008,8 +988,7 @@ void	Search()
 		QOut(Term, "0You didn't find anything.");
 }
 
-UserPoint	FindDm(Usr)
-UserPoint	Usr;
+UserPoint FindDm(UserPoint Usr)
 {
 	UserPoint	Temp;
 
@@ -1020,8 +999,7 @@ UserPoint	Usr;
 	return NULL;
 }
 
-void	LocalMsg(s)
-char	*s;
+void LocalMsg(char *s)
 {
 	int		Count, ILoop;
 
@@ -1030,8 +1008,7 @@ char	*s;
 		QOut(TermList[ILoop], s);
 }
 
-void	AllMsg(s)
-char	*s;
+void AllMsg(char *s)
 {
 	int		Count, ILoop;
 

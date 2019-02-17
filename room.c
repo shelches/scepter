@@ -1,6 +1,5 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	ReadSeg(int SlotNum, int SegNum);
 static void	EraseTail(ObjectPoint Object);
 static void	StopPlyrAtk(MonsterPoint Monster, RmCodeType Rm);
@@ -9,24 +8,20 @@ static void	CleanRm(RmCodeType Rm);
 static void	InActive(int Rm);
 static int	OkSend(UserPoint Usr);
 static UserPoint	MatchUser(UserPoint Usr);
-#else
-static UserPoint	MatchUser();
-#endif
 
-void	OpenCave()
+void OpenCave(void)
 {
 	if (!(ECaves = fopen(EDUNGEON, FOPEN)))
 		Abort(" Sce910 - Error opening dungeon file.");
 }
 
-void	CloseCave()
+void CloseCave(void)
 {
 	if (fclose(ECaves))
 		Abort(" Sce911 - Error closing dungeon file.");
 }
 
-int		W(Rm)
-int		Rm;
+int W(int Rm)
 {
 	int		Where = 0;
 
@@ -39,8 +34,7 @@ int		Rm;
 	return Where;
 }
 
-void	Condition(Plyr)
-UserPoint	Plyr;
+void Condition(UserPoint Plyr)
 {
 	sprintf(B1,
 		"0You have %d/%d vitality pts, %d/%d fatigue pts, and %d/%d magic pts.",
@@ -49,8 +43,7 @@ UserPoint	Plyr;
 	QOut(Term, B1);
 }
 
-void	PlayerDisplay(Plyer)
-UserPoint	Plyer;
+void PlayerDisplay(UserPoint Plyer)
 {
 	ObjectPoint	Obj;
 	int			Count;
@@ -146,8 +139,7 @@ UserPoint	Plyer;
 	}
 }
 
-static void	ReadSeg(SlotNum, SegNum)
-int		SlotNum, SegNum;
+static void ReadSeg(int SlotNum, int SegNum)
 {
 	int		RLoop, T;
 
@@ -170,9 +162,7 @@ int		SlotNum, SegNum;
 	}
 }
 
-void	WriteSeg(SlotNum, SegNum, Erase)
-int		SlotNum, SegNum;
-int		Erase;
+void WriteSeg(int SlotNum, int SegNum, int Erase)
 {
 	int		RLoop, T;
 
@@ -216,8 +206,7 @@ int		Erase;
 	}
 }
 
-static void	EraseTail(Object)
-ObjectPoint	Object;
+static void EraseTail(ObjectPoint Object)
 {
 	while (Object)
 	{
@@ -230,8 +219,7 @@ ObjectPoint	Object;
 }
 
 /* Return physical loc of room in room list */
-S(Rm)
-int		Rm;
+int S(int Rm)
 {
 	int		ILoop, SegNum;
 	static int	LastOut;
@@ -266,7 +254,7 @@ int		Rm;
 	return (ILoop * 10 + Rm - SegNum * 10);
 }
 
-void	AddSeg()
+void AddSeg(void)
 {
 	if (NumSegs > MaxSegs)
 		QOut(Term, "0 Sorry, max room limit reached.");
@@ -301,9 +289,7 @@ void	AddSeg()
 	NumRooms = NumSegs * 10 - 1;
 }
 
-static void	StopPlyrAtk(Monster, Rm)
-MonsterPoint	Monster;
-RmCodeType		Rm;
+static void StopPlyrAtk(MonsterPoint Monster, RmCodeType Rm)
 {
 	UserPoint	Plyer;
 
@@ -312,9 +298,7 @@ RmCodeType		Rm;
 			Plyer->DefMon = NULL;
 }
 
-static void	StopOtherAtk(Player, Rm)
-UserPoint	Player;
-RmCodeType	Rm;
+static void StopOtherAtk(UserPoint Player, RmCodeType Rm)
 {
 	MonsterPoint	Mon;
 	UserPoint		OtherPly;
@@ -339,9 +323,7 @@ RmCodeType	Rm;
 	}
 }
 
-void	DeleteMonster(Pt, Rm)
-MonsterPoint	Pt;
-RmCodeType		Rm;
+void DeleteMonster(MonsterPoint Pt, RmCodeType Rm)
 {
 	if (!Pt)
 		Abort(" Sce86 - Cannot delete NULL monster!");
@@ -368,9 +350,7 @@ RmCodeType		Rm;
 		StopPlyrAtk(Pt, Rm);
 }
 
-void	InsertMonster(Monster, Rm)
-MonsterPoint	Monster;
-RmCodeType		Rm;
+void InsertMonster(MonsterPoint Monster, RmCodeType Rm)
 {
 	Monster->Next = Room[Rm].RmMonsterTail;
 	Room[Rm].RmMonsterTail = Monster;
@@ -378,8 +358,7 @@ RmCodeType		Rm;
 }
 
 /* remove old monsters and objects that don't have the permanent bit set */
-static void	CleanRm(Rm)
-RmCodeType	Rm;
+static void CleanRm(RmCodeType Rm)
 {
 	MonsterPoint	NextMon, OldMon;
 	ObjectPoint		NextObj, OldObj;
@@ -407,9 +386,7 @@ RmCodeType	Rm;
 	}
 }
 
-void	PlacePlayer(Plyr, Rm)
-UserPoint	Plyr;
-RmCodeType	Rm;
+void PlacePlayer(UserPoint Plyr, RmCodeType Rm)
 {
 	int		NewRm;
 
@@ -420,9 +397,7 @@ RmCodeType	Rm;
 	Plyr->RmCode = NewRm;
 }
 
-void	DeletePlayer(Pt, Rm)
-UserPoint	Pt;
-RmCodeType	Rm;
+void DeletePlayer(UserPoint Pt, RmCodeType Rm)
 {
 	if (!Pt)
 		Abort(" Sce87 - Cannot delete NULL player!");
@@ -456,8 +431,7 @@ RmCodeType	Rm;
 	InActive(Rm);
 }
 
-static void	InActive(Rm)
-int		Rm;
+static void InActive(int Rm)
 {
 	int		Seg;
 
@@ -467,8 +441,7 @@ int		Rm;
 	--Active[Seg];
 }
 
-void	DeleteUser(Pt)
-UserPoint	Pt;
+void DeleteUser(UserPoint Pt)
 {
 	if (!Pt || !UserTail)
 		Abort(" Sce88 - Cannot delete NULL user!");
@@ -497,8 +470,7 @@ UserPoint	Pt;
 	StopFollow(Pt);
 }
 
-void	StopFollow(Plyr)
-UserPoint	Plyr;
+void StopFollow(UserPoint Plyr)
 {
 	UserPoint	FollowPlyr;
 
@@ -507,8 +479,7 @@ UserPoint	Plyr;
 			FollowPlyr->Follow = NULL;
 }
 
-void	RoomDisplay(Rm, Brief)
-int		Rm, Brief;
+void RoomDisplay(int Rm, int Brief)
 {
 	int				ILoop, Count;
 	ObjectPoint		Object;
@@ -680,14 +651,12 @@ int		Rm, Brief;
 	strcpy(User->Name, Temp);
 }
 
-static int	OkSend(Usr)
-UserPoint	Usr;
+static int OkSend(UserPoint Usr)
 {
 	return (Usr != User && Usr->Status != SLogin);
 }
 
-UserPoint	NextOkSend(Usr)
-UserPoint	Usr;
+UserPoint NextOkSend(UserPoint Usr)
 {
 	for (; Usr; Usr = Usr->Next)
 		if (OkSend(Usr))
@@ -696,8 +665,7 @@ UserPoint	Usr;
 	return NULL;
 }
 
-static UserPoint	MatchUser(Usr)
-UserPoint	Usr;
+static UserPoint MatchUser(UserPoint Usr)
 {
 	for (; Usr; Usr = Usr->NextUser)
 		if (OkSend(Usr))
@@ -706,8 +674,7 @@ UserPoint	Usr;
 	return NULL;
 }
 
-int		MsgTerm(TalkHow)
-TalkHowType	TalkHow;
+int MsgTerm(TalkHowType TalkHow)
 {
 	int		Count = 0;
 
@@ -771,9 +738,7 @@ TalkHowType	TalkHow;
 	return Count;
 }
 
-void	RoomMsg(Rm, Count)
-RoomType	*Rm;
-int			*Count;
+void RoomMsg(RoomType *Rm, int *Count)
 {
 	UserPoint	OtherPlayer;
 
