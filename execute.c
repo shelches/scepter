@@ -6,11 +6,7 @@
 #define	fNUM	3	/* func(Word, Num); */
 #define	fROOM	4	/* func(Word, Num, User->RmCode); */
 
-#ifdef	PROTO
 typedef	void	(*PFV)(void);
-#else
-typedef	void	(*PFV)();
-#endif
 
 static struct
 {
@@ -43,7 +39,7 @@ static struct
 	88, fUSER,	(PFV)Condition,		0
 };
 
-void	ExecuteCommand()
+void ExecuteCommand(void)
 {
 	int		Num, ILoop;
 	Alfa	Cmd, Word;

@@ -1,13 +1,8 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	AddSpell(int N, char *Nm, int Hash, int Len, int MP, int Lvl, int Int, int Ty);
-#endif
 
-static void	AddSpell(N, Nm, Hash, Len, MP, Lvl, Int, Ty)
-int		N;
-char	*Nm;
-int		Hash, Len, MP, Lvl, Int, Ty;
+static void AddSpell(int N, char *Nm, int Hash, int Len, int MP, int Lvl, int Int, int Ty)
 {
 	strcpy(SpellList[N], Nm);
 	SpellClass[N].SplHash	= Hash;
@@ -20,7 +15,7 @@ int		Hash, Len, MP, Lvl, Int, Ty;
 	Spellen = Max(N, Spellen);
 }
 
-void	InitSpells()
+void InitSpells(void)
 {
 	Spellen = 0;
 
@@ -50,8 +45,7 @@ void	InitSpells()
 	AddSpell(SPELL_ILLUMINATE, "ILLUMINATE",	 52,  5, 50, 10, 18, OnUser);
 }
 
-void	ODestroy(Cont)		/* var!! */
-ObjectPoint	Cont;
+void ODestroy(ObjectPoint Cont)
 {
 	if (Cont->ObClass == Chest)
 	{
@@ -71,8 +65,7 @@ ObjectPoint	Cont;
 	Cont = NULL;
 }
 
-void	DeleteObject(Pt, ObjectTail)
-ObjectPoint	Pt, *ObjectTail;
+void DeleteObject(ObjectPoint Pt, ObjectPoint *ObjectTail)
 {
 	if (!Pt)
 		Abort(" Sce84 - Cannot delete NIL obj!");
@@ -93,8 +86,7 @@ ObjectPoint	Pt, *ObjectTail;
 	}
 }
 
-void	ExpandName(Name, Str)
-char	*Name, *Str;
+void ExpandName(char *Name, char *Str)
 {
 	int		ILoop;
 
@@ -122,10 +114,7 @@ char	*Name, *Str;
 	strcpy(Str, Name);	/* Name has no commas */
 }
 
-void	PrintObj(Obj, Singular, Capital, Str)
-ObjectPoint	Obj;
-int			Singular, Capital;
-char		*Str;
+void PrintObj(ObjectPoint Obj, int Singular, int Capital, char *Str)
 {
 	char	Ar[20], Str1[256];
 
@@ -221,8 +210,7 @@ char		*Str;
 	}
 }
 
-void	ObjDisplay(Object)
-ObjectPoint	Object;
+void ObjDisplay(ObjectPoint Object)
 {
 	PrintObj(Object, FALSE, TRUE, B2);
 	sprintf(B1, "0%s, ", B2);
@@ -385,8 +373,7 @@ ObjectPoint	Object;
 	}
 }
 
-void	Ld(Name, Entry)
-char	*Name, *Entry;
+void Ld(char *Name, char *Entry)
 {
 	int		ILoop;
 
@@ -399,10 +386,7 @@ char	*Name, *Entry;
 }
 
 /* FindObject returns the matching object to *Word* in the list */
-ObjectPoint	FindObject(Word, Num, ObjectTail)
-char		*Word;
-int			Num;
-ObjectPoint	ObjectTail;
+ObjectPoint FindObject(char *Word, int Num, ObjectPoint ObjectTail)
 {
 	ObjectPoint	Object;
 	NameTList	ObjNameList;

@@ -1,8 +1,6 @@
 #include "scepter.h"
 
-void	EnterSpell(Word, Num)
-char	*Word;
-int		Num;
+void EnterSpell(char *Word, int Num)
 {
 	if (ReadyCheck(User->LastAtk))
 	{
@@ -16,12 +14,7 @@ int		Num;
 	LenBuf = 0;
 }
 
-int		SpellMon(SpellCode, Level, Intel, Plyr, Monster, Obj, Target)
-int				SpellCode, Level, Intel;
-UserPoint		Plyr;
-MonsterPoint	Monster;
-ObjectPoint		Obj;
-char			*Target;
+int SpellMon(int SpellCode, int Level, int Intel, UserPoint Plyr, MonsterPoint Monster, ObjectPoint Obj, char *Target)
 {
 	int		Damage = 0;
 	static char	*NothingText = "0Nothing happens.";
@@ -348,8 +341,7 @@ char			*Target;
 	return Damage;
 }
 
-void	Spell(SpellCode)
-int		SpellCode;
+void Spell(int SpellCode)
 {
 	MonsterPoint	Mon = NULL;
 	ObjectPoint		Obj = NULL;

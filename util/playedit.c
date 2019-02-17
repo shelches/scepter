@@ -4,7 +4,7 @@
 FILE	*fp;
 struct tUserFRec	rec;
 
-main()
+void main(void)
 {
 	int			c, i;
 	unsigned	opt;
@@ -34,7 +34,7 @@ main()
 	fclose(fp);
 }
 
-readrec(n)
+size_t readrec(int n)
 {
 	fseek(fp, (long)n * sizeof rec, 0);
 	return fread(&rec, sizeof rec, 1, fp);
@@ -43,7 +43,7 @@ readrec(n)
 char	*class[] =
 {"fighter", "thief", "MU", "DM", "cleric", "paladin", "ranger", "barbarian"};
 
-disprec(n)
+void disprec(int n)
 {
 	int		i;
 	static int	prev = -1;

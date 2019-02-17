@@ -6,7 +6,7 @@ OldMonsterType	OldMon;
 NewMonsterType	NewMon;
 FILE    *ifp, *ofp, *fopen();
 
-main()
+void main(void)
 {
 	ifp = fopen("3:/etc/scepter/mlist", "r");
 	ofp = fopen("3:/etc/scepter/newmlist", "w");

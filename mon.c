@@ -1,9 +1,6 @@
 #include "scepter.h"
 
-void	PM(Mon, C, Str)
-MonsterPoint	Mon;
-int				C;
-char			*Str;
+void PM(MonsterPoint Mon, int C, char *Str)
 {
 	char	Str1[40];
 
@@ -20,10 +17,7 @@ char			*Str;
 		*Str = Cap(*Str);
 }
 
-void	PrintMon(Mon, S, C, Str)
-MonsterPoint	Mon;
-int				S, C;
-char			*Str;
+void PrintMon(MonsterPoint Mon, int S, int C, char *Str)
 {
 	char	Str1[256];
 
@@ -45,8 +39,7 @@ char			*Str;
 		strcat(Str, " (INV)");
 }
 
-void	Destroy(Mon)
-MonsterPoint	Mon;
+void Destroy(MonsterPoint Mon)
 {
 	while (Mon->ObjectTail)
 	{
@@ -59,9 +52,7 @@ MonsterPoint	Mon;
 	free(Mon);
 }
 
-void	FixMonCount(MonsterTail, Name)
-MonsterPoint	MonsterTail;
-char			*Name;
+void FixMonCount(MonsterPoint MonsterTail, char *Name)
 {
 	MonsterPoint	Pt;
 	int				NumMon;
@@ -87,8 +78,7 @@ char			*Name;
 	}
 }
 
-void	MonDisplay(Mon)
-MonsterPoint	Mon;
+void MonDisplay(MonsterPoint Mon)
 {
 	ObjectPoint	Object;
 
@@ -174,10 +164,7 @@ MonsterPoint	Mon;
 }
 
 /* returns the matching	monster	to *Word* in the list */
-MonsterPoint FindMonster(Word, Num,	MonsterTail)
-char			*Word;
-int				Num;
-MonsterPoint	MonsterTail;
+MonsterPoint FindMonster(char *Word, int Num, MonsterPoint MonsterTail)
 {
 	int				Count, Index;
 	MonsterPoint	Mon;

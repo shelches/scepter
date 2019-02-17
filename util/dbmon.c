@@ -2,7 +2,7 @@
 
 MonRec	Rec;
 
-main()
+void main(void)
 {
 	FILE	*EDBMon;
 	int		i;

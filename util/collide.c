@@ -1,6 +1,6 @@
 #include "../scepter.h"
 
-main()
+void main(void)
 {
 	FILE	*fp;
 	ObjRec	rec;

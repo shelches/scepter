@@ -6,10 +6,8 @@
 #include "common.h"
 #include "scepter.h"
 
-#ifdef	PROTO
 static void	Init_Scepter(void);
 static void	DoEntry(void);
-#endif
 
 static unsigned GetDate(time_t t)
 {
@@ -35,7 +33,7 @@ void Boom(int sig)
 	}
 }
 
-void	main(void)
+void main(void)
 {
 	unsigned	minute;
 	int Aborted = FALSE;
@@ -157,7 +155,7 @@ void	main(void)
 	exit(0);
 }
 
-static void	Init_Scepter()
+static void Init_Scepter(void)
 {
 	int		ILoop;
 
@@ -225,7 +223,7 @@ static void	Init_Scepter()
 	}
 }
 
-static void	DoEntry()
+static void DoEntry(void)
 {
 	switch ((int) User->Entry)
 	{

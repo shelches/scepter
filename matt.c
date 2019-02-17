@@ -1,6 +1,6 @@
 #include "scepter.h"
 
-void	MonAttack()
+void MonAttack(void)
 {
 	UserPoint		Plyr;
 	static TimeType	LastAtk, LastBuzz;
@@ -55,8 +55,7 @@ void	MonAttack()
 	}
 }
 
-void	MonStrike(Rm)
-RmCodeType	Rm;
+void MonStrike(RmCodeType Rm)
 {
 	MonsterPoint	Monster;
 	UserPoint		Plyr;
@@ -465,9 +464,7 @@ RmCodeType	Rm;
 	}
 }
 
-void	EncounterMsg(Mon, Rm, NumMons, NonDMs)
-MonsterPoint	Mon;
-RmCodeType		Rm;
+void EncounterMsg(MonsterPoint Mon, RmCodeType Rm, int NumMons, int NonDMs)
 {
 	if (!Mon->Invisible && !Room[Rm].Dark)
 	{
@@ -498,9 +495,7 @@ RmCodeType		Rm;
 	}
 }
 
-void	AttackMsg(Monster, Plyr)
-MonsterPoint	Monster;
-UserPoint		Plyr;
+void AttackMsg(MonsterPoint Monster, UserPoint Plyr)
 {
 	UserPoint	TUser;
 
@@ -515,7 +510,7 @@ UserPoint		Plyr;
 	User = TUser;
 }
 
-void	InitEvents()
+void InitEvents(void)
 {
 	Event[0]  = "00:01:00";
 	Event[1]  = "00:05:00";
@@ -541,7 +536,7 @@ void	InitEvents()
 	LenEvent = 20;
 }
 
-void	TimeCheck()
+void TimeCheck(void)
 {
 	int		EventNum, Found;
 
@@ -653,8 +648,7 @@ void	TimeCheck()
 		NextEvent = Event[(EventNum + 1) % LenEvent];
 }
 
-void	SystemMsg(s)
-char	*s;
+void SystemMsg(char *s)
 {
 	int		Count, ILoop;
 

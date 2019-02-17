@@ -1,6 +1,6 @@
 #CFLAGS	= +Wc,t=5000 +Wc,+u +Wi,t=10000 S=3000
 #TARGET = -DERUG
-CFLAGS = -c -w3 -DPROTO $(TARGET)
+CFLAGS = -c -w3 $(TARGET)
 
 OBJS = scepter.o cmd1.o cmd2.o cmd3.o cmd4.o db.o execute.o \
 edit1.o edit2.o io.o ipc.o log.o main.o matt.o \

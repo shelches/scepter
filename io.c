@@ -1,6 +1,6 @@
 #include "scepter.h"
 
-void	InitCmds()
+void InitCmds(void)
 {
 	int		i;
 	static struct
@@ -58,32 +58,27 @@ void	InitCmds()
 	}
 }
 
-int		Min(a, b)
-int		a, b;
+int Min(int a, int b)
 {
 	return a < b ? a : b;
 }
 
-int		Max(a, b)
-int		a, b;
+int Max(int a, int b)
 {
 	return a > b ? a : b;
 }
 
-long MinL(a, b)
-long	a, b;
+long MinL(long a, long b)
 {
 	return a < b ? a : b;
 }
 
-long MaxL(a, b)
-long	a, b;
+long MaxL(long a, long b)
 {
 	return a > b ? a : b;
 }
 
-void	Abort(Error)
-char	*Error;
+void Abort(char *Error)
 {
 	FILE	*fp;
 
@@ -95,14 +90,13 @@ char	*Error;
 	exit(1);
 }
 
-void	SetRandom(a, b)
-int		a, b;
+void SetRandom(int a, int b)
 {
 	Srand(a, b, a + b);
 }
 
 /* Random number from 1 to X, inclusive. */
-int		Rnd(X)
+int Rnd(int X)
 {
 	if (X)
 		return (Rand() % X) + 1;
@@ -110,8 +104,7 @@ int		Rnd(X)
 }
 
 /* See if *Part* is an abbreviation of *Full* */
-int		SubSet(Part, Full)
-char	*Part, *Full;
+int SubSet(char *Part, char *Full)
 {
 	int		I;
 
@@ -121,15 +114,12 @@ char	*Part, *Full;
 	return TRUE;
 }
 
-char	*Pb(X)
-int		X;
+char *Pb(int X)
 {
 	return X ? " TRUE" : "FALSE";
 }
 
-void	Pn(N, Str)
-int		N;
-char	*Str;
+void Pn(int N, char *Str)
 {
 	static char	*NumString[] =
 	{
@@ -146,9 +136,7 @@ char	*Str;
 		sprintf(Str, "%d ", N);
 }
 
-void	PNth(N, Str)
-int		N;
-char	*Str;
+void PNth(int N, char *Str)
 {
 	static char	*NTh[] =
 	{
@@ -180,14 +168,12 @@ char	*Str;
 		}
 }
 
-char	*Pa(First)
-char	First;
+char *Pa(char First)
 {
 	return (strchr("AEIOU", Cap(First)) ? "an" : "a");
 }
 
-int		Cap(Ch)
-int		Ch;
+int Cap(int Ch)
 {
 	if (Ch >= 'a' && Ch <= 'z')
 		return Ch - ' ';
@@ -195,8 +181,7 @@ int		Ch;
 		return Ch;
 }
 
-void	CapAlfa(a)
-char	*a;
+void CapAlfa(char *a)
 {
 	while (*a)
 	{
@@ -205,9 +190,7 @@ char	*a;
 	}
 }
 
-void	GetWord(Word, Num)
-char	*Word;
-int		*Num;
+void GetWord(char *Word, int *Num)
 {
 	*Word = '\0';
 	*Num = 0;
@@ -279,7 +262,7 @@ int		*Num;
 	}
 }
 
-void	DoInput()
+void DoInput(void)
 {
 	Loc = 0;
 	LenBuf = Min(256, strlen(C1) - 1);
@@ -293,10 +276,7 @@ void	DoInput()
 }
 
 /* Locate *Word* in first *Count* entries of *NameList* using binary search */
-int		BinaryMatch(Word, Count, NameList)
-char		*Word;
-int			Count;
-CmdListType	NameList;
+int BinaryMatch(char *Word, int Count, CmdListType NameList)
 {
 	int		Lower, Upper, Posit, CmpVal;
 
@@ -338,10 +318,7 @@ CmdListType	NameList;
 }
 
 /* Locate *Word* in first *Count* entries of *NameList* */
-int		WordMatch(Word, Count, NameList)
-char		*Word;
-int			Count;
-NameTList	NameList;
+int WordMatch(char *Word, int Count, NameTList NameList)
 {
 	int		ILoop, JLoop, Found;
 
@@ -374,9 +351,7 @@ NameTList	NameList;
 	return ILoop;
 }
 
-void	Punctuate(Num, Total, Str)
-int		Num, Total;
-char	*Str;
+void Punctuate(int Num, int Total, char *Str)
 {
 	if (Num != Total)
 		strcat(Str, Total - Num < 2 ? " and " : ", ");
@@ -387,10 +362,7 @@ char	*Str;
 	}
 }
 
-void	Pd(Rec, Line, PhraseNum, Brief, Cont, V)
-int		Rec, Line, PhraseNum, Brief;
-int		*Cont;
-char	*V;
+void Pd(int Rec, int Line, int PhraseNum, int Brief, int *Cont, char *V)
 {
 	int		NumPhrases, ILoop, LinePos, BrMark, VSub, Found;
 	char	S[256];
@@ -459,9 +431,7 @@ char	*V;
 			}
 }
 
-void	PrintDesc(Rec, Line, PhraseNum, Brief, Str1, Str2)
-int		Rec, Line, PhraseNum, Brief;
-char	*Str1, *Str2;
+void PrintDesc(int Rec, int Line, int PhraseNum, int Brief, char *Str1, char *Str2)
 {
 	int		Cont;
 	char	Str3[256];

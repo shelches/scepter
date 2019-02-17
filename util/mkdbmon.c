@@ -3,7 +3,7 @@
 MonRec	rec;
 int		i;
 
-main()
+void main(void)
 {
 	FILE	*fp;
 

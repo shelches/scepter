@@ -1,18 +1,12 @@
 #include "scepter.h"
 
-#ifdef	PROTO
 static ObjectPoint	Fist(void);
 static void	HitAtMonster(ObjectPoint Weapon, int Plus);
 static void	HitAtPlayer(ObjectPoint Weapon, int Plus);
 static ObjectPoint	SelectWeap(void);
 static ToWhatType	AttackWhat(char *Word, int Num, RmCodeType Rm);
-#else
-static ObjectPoint	Fist();
-static ObjectPoint	SelectWeap();
-static ToWhatType	AttackWhat();
-#endif
 
-static ObjectPoint	Fist()
+static ObjectPoint Fist(void)
 {
 	ObjectPoint	Weapon;
 
@@ -27,9 +21,7 @@ static ObjectPoint	Fist()
 	return Weapon;
 }
 
-static void	HitAtMonster(Weapon, Plus)
-ObjectPoint	Weapon;
-int			Plus;
+static void HitAtMonster(ObjectPoint Weapon, int Plus)
 {
 	int		WithFist;
 
@@ -144,9 +136,7 @@ int			Plus;
 		free(Weapon);
 }
 
-static void	HitAtPlayer(Weapon, Plus)
-ObjectPoint	Weapon;
-int			Plus;
+static void HitAtPlayer(ObjectPoint Weapon, int Plus)
 {
 	int				WithFist;
 	UserPoint		Plyr;
@@ -192,7 +182,7 @@ int			Plus;
 		free(Weapon);
 }
 
-static ObjectPoint	SelectWeap()
+static ObjectPoint SelectWeap(void)
 {
 	if (!User->USWeap)
 		return NULL;
@@ -207,10 +197,7 @@ static ObjectPoint	SelectWeap()
 	return User->USWeap;
 }
 
-static ToWhatType	AttackWhat(Word, Num, Rm)
-char		*Word;
-int			Num;
-RmCodeType	Rm;
+static ToWhatType AttackWhat(char *Word, int Num, RmCodeType Rm)
 {
 	UserPoint	OldDefPlayer;
 
@@ -258,10 +245,7 @@ RmCodeType	Rm;
 	return ToPlayer;
 }
 
-void	Attack(Word, Num, Rm)
-char		*Word;
-int			Num;
-RmCodeType	Rm;
+void Attack(char *Word, int Num, RmCodeType Rm)
 {
 	int			Plus;
 	ObjectPoint	Weapon;
@@ -393,7 +377,7 @@ RmCodeType	Rm;
 	User->LastAtk = RealTime + Max(3, Plus);
 }
 
-void	UpdateF()
+void UpdateF(void)
 {
 	int		ILoop;
 
@@ -433,9 +417,7 @@ void	UpdateF()
 	fclose(EFile);
 }
 
-void	Repair(Word, Num)
-char	*Word;
-int		Num;
+void Repair(char *Word, int Num)
 {
 	ObjectPoint	Obj;
 
@@ -465,7 +447,7 @@ int		Num;
 
 		PrintObj(Obj, FALSE, FALSE, B2);
 		sprintf(B1,
-			"0Hmm.  Repairing %s will cost you %d shillings.  Do you accept?",
+			"0Hmm.  Repairing %s will cost you %ld shillings.  Do you accept?",
 			B2, User->Data);
 		QOut(Term, B1);
 		User->Entry = XRepair;
@@ -473,9 +455,7 @@ int		Num;
 	}
 }
 
-void	ChangeName(Word, Num)
-char	*Word;
-int		Num;
+void ChangeName(char *Word, int Num)
 {
 	for (Num = 0; Num < sizeof(Alfa); Num++)
 		if (Cap(Word[Num]) < 'A' || Cap(Word[Num]) > 'Z')
@@ -499,9 +479,7 @@ int		Num;
 	}
 }
 
-void	ChangePW(Word, Num)
-char	*Word;
-int		Num;
+void ChangePW(char *Word, int Num)
 {
 	Alfa	Word3;
 
@@ -519,9 +497,7 @@ int		Num;
 	}
 }
 
-void	Offer(Word, Num)
-char	*Word;
-int		Num;
+void Offer(char *Word, int Num)
 {
 	UserPoint	TPlyr;
 	int			Num2;
@@ -530,7 +506,7 @@ int		Num;
 
 	if (TradeTime >= RealTime)
 	{
-		sprintf(B1, "0Trade already in progess.  Try again in %d seconds.",
+		sprintf(B1, "0Trade already in progess.  Try again in %ld seconds.",
 				TradeTime - RealTime);
 		QOut(Term, B1);
 		return;
@@ -597,7 +573,7 @@ int		Num;
 	QOut(TPlyr->Trm, "0Enter \"ACCEPT\" to accept the offer.");
 }
 
-void	Accept()
+void Accept(void)
 {
 	UserPoint	FPlyr;
 	ObjectPoint	FObj, TObj;
@@ -674,7 +650,7 @@ void	Accept()
 	QOut(FPlyr->Trm, B1);
 }
 
-void	NumUsers()
+void NumUsers(void)
 {
 	UserPoint	Plyr;
 	int			ILoop;
@@ -693,7 +669,7 @@ void	NumUsers()
 	}
 }
 
-void	Help()
+void Help(void)
 {
 	int		ILoop;
 
@@ -717,9 +693,7 @@ void	Help()
 	QOut(Term, "0");
 }
 
-void	Parley(Word, Num)
-char	*Word;
-int		Num;
+void Parley(char *Word, int Num)
 {
 	MonsterPoint	Mon;
 	int				Opt, N1;
@@ -760,7 +734,7 @@ int		Num;
 				PM(Mon, TRUE, B2);
 				PrintObj(&ObjTemp, FALSE, FALSE, B3);
 				sprintf(B1,
-					"0%s says, \"I will sell you %s for a mere %d shillings.\"",
+					"0%s says, \"I will sell you %s for a mere %ld shillings.\"",
 					B2, B3, User->Data);
 				QOut(Term, B1);
 				User->Entry = XParley;
@@ -925,7 +899,7 @@ int		Num;
 	}
 }
 
-void	YesNo()
+void YesNo(void)
 {
 	ObjectPoint	Obj;
 	int			Num, Yes;
@@ -1022,7 +996,7 @@ void	YesNo()
 	Loc = LenBuf + 1;
 }
 
-void	EnterNotice()
+void EnterNotice(void)
 {
 	int		ILoop, JLoop;
 
@@ -1033,7 +1007,7 @@ void	EnterNotice()
 	User->Entry = XCmd;
 }
 
-void	EnterNews()
+void EnterNews(void)
 {
 	int		ILoop, Found;
 
@@ -1061,9 +1035,7 @@ void	EnterNews()
 	User->Entry = XCmd;
 }
 
-void	StealObj(Word, Num)
-Alfa	Word;
-int		Num;
+void StealObj(Alfa Word, int Num)
 {
 	UserPoint	Plyr;
 	Alfa		Word2;

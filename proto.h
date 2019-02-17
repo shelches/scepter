@@ -1,4 +1,3 @@
-#ifdef PROTO
 /* main.c */
 void	main(void);
 
@@ -203,109 +202,9 @@ void	Lose(char *Word);
 void	Quit(int QuitHow);
 void	GetStatus(char *Word);
 void	TextLimits(int *MesStart, int *MesEnd);
-void	SendMsg(int Tm, char *Verb, int MStart, int MEnd, int NoID, int NoQuote);
 void	Talk(char *Word);
 void	DoCmd(void);
 
 /* rand.c */
 int	Rand(void);
 void	Srand(int x1, int x2, int x3);
-
-/* library */
-/*
-void	*malloc(int size), free(void *p);
-void	exit(int errno), get_date(unsigned date[2]), srand(int seed);
-int		rand(void), abs(int n), getpid(void);
-*/
-
-#else
-
-/* main.c */
-void	main();
-
-/* mon.c */
-void	PM(), PrintMon(), Destroy(), FixMonCount(), MonDisplay();
-MonsterPoint	FindMonster();
-
-/* db.c */
-void	ReadUObj(), WriteUObj(), DeleteUObj(), ReadUMon(), WriteUMon();
-void	DeleteMon();
-
-/* log.c */
-UserPoint	Login();
-void	EnterSex(), NewPW(), EnterStats(), EnterSkill(), ChooseClass();
-void	MatchPW(), GetName();
-
-/* execute.c */
-void	ExecuteCommand();
-
-/* io.c */
-int		Min(), Max(), Rnd(), SubSet(), Cap(), BinaryMatch(), WordMatch();
-char	*Pb(), *Pa();
-long	MinL(), MaxL();
-void	InitCmds(), Abort(), SetRandom(), Pn(), PNth(), CapAlfa(), GetWord();
-void	DoInput(), Punctuate(), Pd(), PrintDesc();
-
-/* obj.c */
-void	InitSpells(), ODestroy(), DeleteObject(), ExpandName(), PrintObj();
-void	ObjDisplay(), Ld();
-ObjectPoint	FindObject();
-
-/* user.c */
-int		PlayerOnFile(), Hash(), ReadyCheck();
-long	Expr();
-void	ReadPlayer(), FreePlayer(), WritePlayer(), DeleteUsr(), ChangeUsrName();
-void	Users(), PrintExp(), Inventory(), PrintDmg(), PromptUser(), Init();
-UserPoint	FindPlayer();
-UserPoint	FindUser();
-UserPoint	FindPid();
-
-/* spells.c */
-int		SpellMon();
-void	EnterSpell(), Spell();
-
-/* matt.c */
-void	MonAttack(), MonStrike(), EncounterMsg(), AttackMsg(), InitEvents();
-void	TimeCheck(), SystemMsg();
-
-/* room.c */
-int		S(), W(), MsgTerm();
-void	OpenCave(), CloseCave(), Condition(), PlayerDisplay(), WriteSeg();
-void	AddSeg(), DeleteMonster(), InsertMonster(), PlacePlayer();
-void	DeletePlayer(), DeleteUser(), StopFollow(), RoomDisplay(), RoomMsg();
-UserPoint	NextOkSend();
-
-/* ipc.c */
-void	QAss(), QCre(), QDea(), QRea(), QOut(), GetNextMsg(), Who(), CheckHup();
-
-/* edit1.c */
-void	Edit();
-int		GetEditParm();
-
-/* edit2.c */
-void	ModName(), EditObject(), EditOList(), EditDscrpt(), EnterDesc();
-void	EditETList();
-
-/* cmd1.c */
-int		SpellCost(), Look();
-void	StopUsing(), GetObject(), DropObject(), Train(), OpenClose();
-void	HitShArmor(), Hide(), Search(), LocalMsg(), AllMsg();
-UserPoint	FindDm();
-
-/* cmd2.c */
-void	GoDirection(), ReturnObj(), Track(), Logoff(), Kill(), SaveChar();
-void	Off(), Dead(), ProtectNPC(), Turn(), HitPlayer(), HitMonster();
-int		UseObject(), MonExperience();
-
-/* cmd3.c */
-void	Attack(), UpdateF(), Repair(), ChangeName(), ChangePW(), Offer();
-void	Accept(), NumUsers(), Help(), Parley(), YesNo(), EnterNotice();
-void	EnterNews(), StealObj();
-
-/* cmd4.c */
-void	Appeal(), Run(), Pawn(), Buy(), Catalog(), TagPlayer(), FollowPlayer();
-void	Lose(), Quit(), GetStatus(), TextLimits(), SendMsg(), Talk(), DoCmd();
-
-/* library */
-void	*malloc();
-#endif

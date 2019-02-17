@@ -74,7 +74,7 @@ struct tNewMonsterType
 	unsigned	Magic		: 1;
 } newmon;
 
-main()
+void main(void)
 {
 	FILE	*mlist;
 	int		i;
